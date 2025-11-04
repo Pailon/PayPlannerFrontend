@@ -17,13 +17,24 @@ export default defineConfig({
     port: 3001,
     host: true,
     strictPort: true,
-    allowedHosts: ['all'],
+    allowedHosts: [
+      'marginally-virtuous-otter.cloudpub.ru',
+      '.cloudpub.ru',
+      'localhost',
+    ],
+    hmr: {
+      clientPort: 3001,
+    },
   },
   preview: {
     port: 3001,
     host: true,
     strictPort: true,
-    allowedHosts: ['all'],
+    allowedHosts: [
+      'marginally-virtuous-otter.cloudpub.ru',
+      '.cloudpub.ru',
+      'localhost',
+    ],
   },
   build: {
     outDir: 'dist',
