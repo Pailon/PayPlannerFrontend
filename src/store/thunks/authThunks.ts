@@ -1,4 +1,5 @@
 import { AppDispatch } from '../store';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setAuth, clearAuth, setLoading } from '../slices/authSlice';
 import { api } from '../api';
 
@@ -23,7 +24,7 @@ declare global {
   }
 }
 
-export const initTelegram = () => (dispatch: AppDispatch) => {
+export const initTelegram = () => (_dispatch: AppDispatch) => {
   if (window.Telegram?.WebApp) {
     window.Telegram.WebApp.ready();
     window.Telegram.WebApp.expand();
@@ -53,21 +54,24 @@ export const checkAuth = () => async (dispatch: AppDispatch) => {
   }
 };
 
-export const loginWithTelegram = () => async (dispatch: AppDispatch) => {
-  if (!window.Telegram?.WebApp?.initData) {
-    throw new Error('Telegram WebApp not available');
-  }
+export const loginWithTelegram = createAsyncThunk(
+  'auth/loginWithTelegram',
+  async (_, { dispatch }) => {
+    if (!window.Telegram?.WebApp?.initData) {
+      throw new Error('Telegram WebApp not available');
+    }
 
-  try {
-    const response = await api.post('/auth/telegram', {
-      initData: window.Telegram.WebApp.initData,
-    });
+    try {
+      const response = await api.post('/auth/telegram', {
+        initData: window.Telegram.WebApp.initData,
+      });
 
-    dispatch(setAuth(response.data));
-    return response.data;
-  } catch (error) {
-    dispatch(clearAuth());
-    throw error;
+      dispatch(setAuth(response.data));
+      return response.data;
+    } catch (error) {
+      dispatch(clearAuth());
+      throw error;
+    }
   }
-};
+);
 

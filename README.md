@@ -10,7 +10,6 @@ React мини-приложение для Telegram, позволяющее от
 - **Ant Design** - UI компоненты
 - **Tailwind CSS** - стилизация
 - **Vite** - сборщик и dev-сервер
-- **Docker** - контейнеризация
 
 ## Быстрый старт
 
@@ -20,15 +19,10 @@ npm install
 ```
 
 2. Создайте файл `.env` в корне проекта с переменными:
-   - `REACT_APP_API_URL` - URL бекенд API (по умолчанию `http://localhost:3000`)
-   - `REACT_APP_TELEGRAM_BOT_NAME` - имя Telegram бота
+   - `VITE_API_URL` - URL бекенд API (по умолчанию `http://localhost:3000/api`)
+   - `VITE_TELEGRAM_BOT_NAME` - имя Telegram бота (опционально)
 
-3. Запустите через Docker:
-```bash
-docker-compose up -d
-```
-
-4. Или для разработки:
+3. Запустите проект для разработки:
 ```bash
 npm run dev
 ```
@@ -53,7 +47,6 @@ npm run dev
 │       ├── thunks/    # Async thunks
 │       └── store.ts
 ├── Dockerfile
-├── docker-compose.yml
 ├── index.html
 ├── vite.config.ts
 └── package.json
@@ -61,8 +54,8 @@ npm run dev
 
 ## Переменные окружения
 
-- **REACT_APP_API_URL**: URL бекенд API (например, `http://localhost:3000`)
-- **REACT_APP_TELEGRAM_BOT_NAME**: Имя Telegram бота
+- **VITE_API_URL**: URL бекенд API (например, `http://localhost:3000/api`)
+- **VITE_TELEGRAM_BOT_NAME**: Имя Telegram бота (опционально)
 
 ## Команды
 

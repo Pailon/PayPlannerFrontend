@@ -7,10 +7,22 @@ import {
   updateSubscription,
   fetchSubscriptions,
 } from '../store/slices/subscriptionSlice';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 const { Option } = Select;
 const { TextArea } = Input;
+
+interface SubscriptionFormValues {
+  service_name: string;
+  category?: string;
+  amount: number;
+  currency: string;
+  billing_cycle_days: number;
+  next_payment_date: Dayjs;
+  color_tag?: string;
+  service_url?: string;
+  notes?: string;
+}
 
 const CATEGORIES = [
   'Стриминг',
@@ -70,7 +82,7 @@ export default function SubscriptionForm() {
     }
   }, [id, subscriptions, form, dispatch]);
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async (values: SubscriptionFormValues) => {
     setLoading(true);
     try {
       const data = {
